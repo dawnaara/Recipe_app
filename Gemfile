@@ -22,6 +22,7 @@ gem 'faker', '~> 1.6', '>= 1.6.6'
 gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   gem 'byebug'
+  gem 'factory_girl', '~> 4.7'
 end
 
 group :development do

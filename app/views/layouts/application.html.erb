@@ -7,9 +7,63 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+  <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Recipe_app</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><% if user_signed_in? %>
+        	<li class="active"><%= link_to "My Recipes", root_path %></li>
+        	<li><%= link_to "From the Kitchen", root_path %></li>
+        	<li><%= link_to "Add Recipe", root_path %></li>    			
+    		<li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li> 
+    		<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+    		<li><%= image_tag current_user.avatar_url(48), class: "gravatar" %></li>
+  			<% else %>
+    		<li><%= link_to "Sign Up", new_user_registration_path, :class => 'navbar-link' %></li>
+    		<li><%= link_to "Sign In", new_user_session_path, :class => 'navbar-link' %></li>
+  			<% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="flash">
+    <% if flash[:notice] %>
+      <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:notice] %>
+      </div>
+    <% elsif flash.now[:alert] %>
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash.now[:alert] %>
+      </div>
+    <% elsif flash[:alert] %>
+      <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+  </div>
 <%= yield %>
+</div>
 
 </body>
 </html>
