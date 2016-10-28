@@ -1,0 +1,9 @@
+<div class="div"> 
+	<h2><%= @recipe.title %></h2>
+	<br>
+	<p><%= @recipe.description %></p>
+</div>
+
+<%= link_to "Back", recipe_path, class: 'btn btn-primary' %>
+<%= link_to "Edit", edit_recipe_path, class: 'btn btn-primary' %>
+<%= link_to "Delete", recipe_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this post?' } %>

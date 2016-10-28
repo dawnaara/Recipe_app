@@ -1,5 +1,5 @@
 <div>
-	<p class="text-right">Signed in as: <strong><%= current_user.email %></strong></p>	
+	<p class="text-right">Welcome, <%= @user.name %>!</p>	
 </div>
 
 
@@ -8,3 +8,5 @@
 <!-- -->
 <!-- -->
 <!-- -->
+
+<%= @user.recipes %>
