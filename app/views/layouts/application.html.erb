@@ -29,8 +29,8 @@
       <ul class="nav navbar-nav navbar-right">
         <li><% if user_signed_in? %>
         	<li class="active"><%= link_to "My Recipes", root_path %></li>
-        	<li><%= link_to "From the Kitchen", root_path %></li>
-        	<li><%= link_to "Add Recipe", root_path %></li>    			
+        	<li><%= link_to "From the Kitchen", recipes_path %></li>
+        	<li><%= link_to "Add Recipe", new_recipe_path %></li>    			
     		<li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li> 
     		<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
     		<li><%= image_tag current_user.avatar_url(48), class: "gravatar" %></li>

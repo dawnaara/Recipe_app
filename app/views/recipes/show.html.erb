@@ -1,0 +1,21 @@
+<div class="div"> 
+	<%= image_tag @recipe.image.url(:medium, class: "recipe_image") %>
+	<h2><%= @recipe.title %></h2>
+	<br>
+	<p><%= @recipe.description %></p>
+	<br>
+	<h2>Ingredients</h2>
+	<% @recipe.ingredients.each do |ingredient| %>
+		<p><%= ingredient.name %><p>
+	<% end %> 
+	<br>
+	<h2>Directions</h2>
+	<% @recipe.directions.each do |direction| %>
+		<p><%= direction.step %></p>
+	<% end %>
+
+</div>
+
+<%= link_to "Back", recipe_path, class: 'btn btn-primary' %>
+<%= link_to "Edit", edit_recipe_path, class: 'btn btn-primary' %>
+<%= link_to "Delete", recipe_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this post?' } %>

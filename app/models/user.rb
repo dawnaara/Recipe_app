@@ -1,12 +1,22 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+	has_many :recipes
+	has_many :ingredients
+	has_many :directions
+	has_many :comments
+	has_many :bookmarks
+	has_many :ratings
+
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-   def avatar_url(size)
-     gravatar_id = Digest::MD5::hexdigest(self.email).downcase
-     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
-   end
+  def name
+  	"#{first_name} #{last_name}"
+  end
+
+  def avatar_url(size)
+    gravatar_id = Digest::MD5::hexdigest(self.email).downcase
+    "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
+  end
 
 end
