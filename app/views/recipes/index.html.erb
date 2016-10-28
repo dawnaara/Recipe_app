@@ -3,12 +3,12 @@
 		<% @recipes.each do |recipe| %>
 		    <div class="media">
          		<div class="media-body">
+         		<%= link_to recipe do %>
+         			<%= image_tag recipe.image.url(:medium) %>
            			<h4 class="media-heading">
 						<%= link_to recipe.title, recipe %>
 					</h4>
-           			<small>
-						<%= link_to recipe.description, recipe %>
-					</small>
+				<% end %>
 				</div>
 			</div>
 		<% end %>
