@@ -2,10 +2,6 @@ class User < ActiveRecord::Base
 	has_many :recipes
 	has_many :ingredients
 	has_many :directions
-	has_many :comments
-	has_many :bookmarks
-	has_many :ratings
-
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
