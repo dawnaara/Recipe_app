@@ -2,11 +2,13 @@
 	<p class="text-right">Welcome, <%= @user.name %>!</p>	
 </div>
 
+<div class="">
+	<h2 class="text-center">My Recipes</h2>
+</div>
 
-<!-- Hi, @user.name -->
-<!-- link to current_user recipes, 3 columns per page -->
-<!-- -->
-<!-- -->
-<!-- -->
-
-<%= @user.recipes %>
+<div>
+	<% @user.recipes.each do |recipe| %>
+		<%= image_tag recipe.image.url(:medium) %>
+		<h3><%= link_to recipe.title, recipe %></h3> 
+	<% end %>
+</div>
