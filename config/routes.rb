@@ -6,5 +6,7 @@ Rails.application.routes.draw do
 
   resources :recipes
 
+  resources :tags
+
   root 'welcome#index'
 end

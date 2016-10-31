@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   before_action :find_recipe, only: [:show, :edit, :update, :destroy]
-
+  
   def index
     @recipes = Recipe.all.order("created_at DESC")
   end
@@ -16,6 +16,7 @@ class RecipesController < ApplicationController
     @recipe = current_user.recipes.build(recipe_params)
 
     if @recipe.save
+      @recipe.tags = Tag.update_tags(params[:recipe][:tags])
       flash[:notice] = "Your recipe was saved!"
       redirect_to @recipe 
     else
@@ -29,6 +30,7 @@ class RecipesController < ApplicationController
 
   def update
     if @recipe.update(recipe_params)
+      @recipe.tags = Tag.update_tags(params[:recipe][:tags])      
       redirect_to @recipe
     else
       flash[:notice] = "There was an error updating your recipe."

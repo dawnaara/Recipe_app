@@ -36,6 +36,11 @@
     </div> 
   </div>
 
+<div>
+  <h2>Tags</h2>
+    <%= render partial: 'tags/form', locals: { f: f, tags: @recipe.tags } %>
+</div>
+
 	<%= f.button :submit, class: "btn btn-primary" %>
 
 
