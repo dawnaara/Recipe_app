@@ -1,14 +1,4 @@
 <%= simple_form_for @recipe do |f| %>
-	<% if @recipe.errors.any? %>
-    <div class="alert alert-danger">
-    	<h4><%= pluralize(@recipe.errors.count, "error") %>.</h4>
-       		<ul>
-         		<% @recipe.errors.full_messages.each do |msg| %>
-           		<li><%= msg %></li>
-         		<% end %>
-       		</ul>
-    </div>
-   	<% end %>
 
 	<%= f.input :title, required: true, input_html: { class: 'form-control' } %>
 	<%= f.input :description, required: true, input_html: { class: 'form-control' } %>
@@ -43,5 +33,5 @@
 
 	<%= f.button :submit, class: "btn btn-primary" %>
 
-
 <% end %>
+ 

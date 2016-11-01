@@ -6,6 +6,8 @@ class RecipesController < ApplicationController
   end
 
   def show
+    @tags = @recipe.tags
+    @tag = Tag.new  
   end
 
   def new
