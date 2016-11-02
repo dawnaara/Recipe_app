@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :recipes
+  has_many :bookmarks, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
@@ -12,5 +13,10 @@ class User < ActiveRecord::Base
     gravatar_id = Digest::MD5::hexdigest(self.email).downcase
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
   end
+
+  def bookmark_for(recipe)
+    bookmarks.where(recipe_id: recipe.id).first
+  end
+
 
 end

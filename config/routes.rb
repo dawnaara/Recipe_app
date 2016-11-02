@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show] 
 
-  resources :recipes
+  resources :recipes do
+  	resources :bookmarks, only: [:create, :destroy]
+  end
 
   resources :tags
 

@@ -14,6 +14,10 @@
 		<p><%= direction.step %></p>
 	<% end %>
 
+    <% if current_user %>
+      <%= render partial: 'bookmarks/bookmark', locals: { recipe: @recipe } %>
+    <% end %>
+
 <%= render partial: 'tags/list', locals: { tags: @recipe.tags } %>
 
 <%= link_to "Back", recipes_path, class: 'btn btn-primary' %>
@@ -22,7 +26,8 @@
 	<%= link_to "Delete", recipe_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this post?' } %>
 <% end %>
 
-
+<!-- add button so users can bookmark recipe and add to bookmark#show page -->
+ 
 <%= render 'disqus' %>
 
 </div>

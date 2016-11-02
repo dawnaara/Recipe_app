@@ -2,6 +2,7 @@ class Recipe < ActiveRecord::Base
 	belongs_to :user
 	has_many :ingredients
 	has_many :directions
+	has_many :bookmarks, dependent: :destroy
 	has_many :taggings
 	has_many :tags, through: :taggings
 
