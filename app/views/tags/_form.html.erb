@@ -1,5 +1,6 @@
 <div class="form-group">
-	<%= simple_form_for Tag.new do |f| %>
-		<%= f.input :taggings, class: 'form-control', placeholder: "Enter tags separated by commas", value: tags.map(&:name).join(' ') %>
-	<% end %>
+	<%= f.text_field :tags,
+                     class: 'form-control',
+                     placeholder: "Enter tags separated by commas",
+                     value: tags.map(&:name).join(', ') %>
 </div>

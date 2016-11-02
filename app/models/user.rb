@@ -18,5 +18,9 @@ class User < ActiveRecord::Base
     bookmarks.where(recipe_id: recipe.id).first
   end
 
+  def bookmarked_recipes
+    bookmarks.map(&:recipe)
+  end
+
 
 end

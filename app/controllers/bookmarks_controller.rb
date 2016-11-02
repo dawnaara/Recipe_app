@@ -20,7 +20,7 @@ class BookmarksController < ApplicationController
        flash[:alert] = "Bookmarking failed."
      end
  
-     redirect_to recipe
+     redirect_to recipe 
 
 	end
 
@@ -28,14 +28,11 @@ class BookmarksController < ApplicationController
      recipe = Recipe.find(params[:recipe_id])
      bookmark = current_user.bookmarks.find(params[:id])
  
-     if bokmark.destroy
+     if bookmark.destroy
        flash[:notice] = "This recipe is no longer bookmarked."
      else
        flash[:alert] = "Un-bookmarking failed."
      end
        redirect_to recipe
    end
-
-	private
-
 end

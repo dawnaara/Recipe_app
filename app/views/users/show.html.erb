@@ -6,9 +6,12 @@
 	<h2 class="text-center">My Recipes</h2>
 </div>
 
+<h2>My recipes</h2>
 <div>
-	<% @user.recipes.each do |recipe| %>
-		<%= image_tag recipe.image.url(:medium) %>
-		<h3><%= link_to recipe.title, recipe %></h3> 
-	<% end %>
+	<%= render @user.recipes %>
+</div>
+
+<h2>My bookmarks</h2>
+<div>
+	<%= render @user.bookmarked_recipes %>
 </div>
