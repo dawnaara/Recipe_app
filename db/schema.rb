@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101210934) do
+ActiveRecord::Schema.define(version: 20161103202641) do
+
+  create_table "average_caches", force: :cascade do |t|
+    t.integer  "rater_id"
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "avg",           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "user_id"
@@ -41,6 +50,42 @@ ActiveRecord::Schema.define(version: 20161101210934) do
 
   add_index "ingredients", ["recipe_id"], name: "index_ingredients_on_recipe_id"
 
+  create_table "rates", force: :cascade do |t|
+    t.integer  "rater_id"
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "stars",         null: false
+    t.string   "dimension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rates", ["rateable_id", "rateable_type"], name: "index_rates_on_rateable_id_and_rateable_type"
+  add_index "rates", ["rater_id"], name: "index_rates_on_rater_id"
+
+  create_table "rating_caches", force: :cascade do |t|
+    t.integer  "cacheable_id"
+    t.string   "cacheable_type"
+    t.float    "avg",            null: false
+    t.integer  "qty",            null: false
+    t.string   "dimension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type"
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "stars"
+    t.integer  "user_id"
+    t.integer  "recipe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "ratings", ["recipe_id"], name: "index_ratings_on_recipe_id"
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id"
+
   create_table "recipes", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -51,6 +96,7 @@ ActiveRecord::Schema.define(version: 20161101210934) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "rating"
   end
 
   create_table "taggings", force: :cascade do |t|

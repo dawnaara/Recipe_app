@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :recipes do
   	resources :bookmarks, only: [:create, :destroy]
+  	resources :ratings, except: [:index, :show]
   end
 
   resources :tags

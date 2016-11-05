@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :recipes
+  has_many :ratings, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
 
   devise :database_authenticatable, :registerable,

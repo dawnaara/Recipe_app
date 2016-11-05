@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Stars:</strong>
+  <%= @rating.stars %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @rating.user.name %>
+</p>
+
+<p>
+  <strong>Recipe:</strong>
+  <%= @rating.recipe %>
+</p>
+
+<%= link_to 'Edit', "#" %> |
+<%= link_to 'Back', "#" %>

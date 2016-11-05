@@ -9,6 +9,9 @@
 	<br>
 	<p><%= @recipe.description %></p>
 	<br>
+	<div class="star-rating" data-score= <%= @avg_rating %> ></div>
+	<em><%= "#{@ratings.length} ratings" %></em>
+	<div><%= link_to "Rate this recipe", new_recipe_rating_path(@recipe), class: 'btn btn-primary' %></div>
 	<h2>Ingredients</h2>
 	<% @recipe.ingredients.each do |ingredient| %>
 		<p><%= ingredient.name %><p>
@@ -23,11 +26,22 @@
 	<%= render partial: 'tags/list', locals: { tags: @recipe.tags } %>
 </div>
 
+
 <%= link_to "Back", recipes_path, class: 'btn btn-primary' %>
 <% if current_user && current_user.recipes.include?(@recipe) %>
 	<%= link_to "Edit", edit_recipe_path, class: 'btn btn-primary' %>
 	<%= link_to "Delete", recipe_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this post?' } %>
 <% end %>
+
+<script>
+	$('.star-rating').raty({
+		path: '/assets/',
+		readOnly: true,
+		score: function() {
+			return $(this).attr('data-score');
+		}
+	});
+</script>
  
 <%= render 'disqus' %>
 

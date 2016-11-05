@@ -1,0 +1,18 @@
+<%= simple_form_for([@recipe, @rating]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div id="star-rating"></div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+<script>
+	$('#star-rating').raty({
+		path: '/assets/',
+		scoreName: 'rating[stars]'
+	});
+</script>
