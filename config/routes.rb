@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   	resources :ratings, except: [:index, :show]
   end
 
+  get "recipes/modify/:id", to: "recipes#modify", as: :modify_recipe
+
   resources :tags
 
   root 'welcome#index'

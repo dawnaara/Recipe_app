@@ -31,6 +31,10 @@
     <%= render partial: 'tags/form', locals: { f: f, tags: @recipe.tags } %>
 </div>
 
+<div>
+  <%= f.input :video_embeded_url, required: false, input_html: { class: 'form-control' } %>
+</div>
+
 	<%= f.button :submit, class: "btn btn-primary" %>
 
 <% end %>
