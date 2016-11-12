@@ -61,11 +61,11 @@ class RecipesController < ApplicationController
     # look up recipe sent via params[:id]
     # for current_user, do a current_user.recipes.create using the values in the recipe
     # maybe look up clone or duplicate object in rails
-    @modified_recipe = @recipe.dup 
+    @modified_recipe = @recipe.dup
 
     if @modified_recipe.save
       flash[:notice] = "Here's your new recipe!"
-      redirect_to @modified_recipe
+      redirect_to(edit_recipe_path(@modified_recipe))
     else
       flash[:notice] = "Something went wrong. Please try again."
       redirect_to modify_recipe_path
