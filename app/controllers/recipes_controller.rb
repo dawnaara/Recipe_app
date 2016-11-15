@@ -1,6 +1,5 @@
 class RecipesController < ApplicationController
   before_action :find_recipe, only: [:show, :edit, :update, :destroy, :modify]
-  #before_action :find_rating, only: [:show, :edit, :update, :destroy]
 
   def index
     @recipes = Recipe.all.order("created_at DESC")
@@ -58,18 +57,16 @@ class RecipesController < ApplicationController
   end
 
   def modify
-    # look up recipe sent via params[:id]
-    # for current_user, do a current_user.recipes.create using the values in the recipe
-    # maybe look up clone or duplicate object in rails
-    @modified_recipe = @recipe.dup
+    @modified_recipe = @recipe.dup #makes a duplicate of the instance of the recipe model
+    @modified_recipe.image = @recipe.image #to copy the image as well as the model
+    @modified_recipe.user = current_user #to associate the modified_recipe with current_user
 
     if @modified_recipe.save
       flash[:notice] = "Here's your new recipe!"
-      redirect_to(edit_recipe_path(@modified_recipe))
     else
       flash[:notice] = "Something went wrong. Please try again."
-      redirect_to modify_recipe_path
     end
+    redirect_to(edit_recipe_path(@modified_recipe))
 
     # redirect to current_user's receipe edit page for that new recipe
   end
@@ -83,8 +80,4 @@ class RecipesController < ApplicationController
   def recipe_params
     params.require(:recipe).permit(:title, :description, :rating, :image, :video_embeded_url, ingredients_attributes: [:id, :name, :_destroy], directions_attributes: [:id, :step, :_destroy])
   end
-
-  #def find_rating
-   # @rating = Rating.find(params[:recipe_id])
-  #end
 end

@@ -1,6 +1,6 @@
  <% if bookmark = current_user.bookmark_for(recipe) %>
    <%= link_to [recipe, bookmark], class: 'btn btn-danger', method: :delete do %>
-     <i class="glyphicon glyphicon-star-empty"> </i>&nbsp; Remove
+     <i class="glyphicon glyphicon-star-empty"> </i>&nbsp; Remove from bookmarks
    <% end %>
  <% else %>
    <%= link_to [recipe, Bookmark.new], class: 'btn btn-primary', method: :post do %>

@@ -1,17 +1,31 @@
 <div>
-	<p class="text-right">Welcome, <%= @user.name %>!</p>	
+	<h4 class="text-right">Hi, <%= @user.first_name %>!</h4>	
 </div>
 
-<div class="">
+<div>
 	<h2 class="text-center">My Recipes</h2>
 </div>
 
-<h2>My recipes</h2>
-<div>
-	<%= render @user.recipes %>
+<div class="container">
+	<% @user.recipes.each_slice(3) do |row| %>
+		<div class="row">
+			<% row.each do |recipe| %>
+			<div class="col-md-4">
+				<%= link_to recipe do %>
+         			<%= image_tag recipe.image.url(:medium) %>
+           			<h4 class="media-heading">
+						<%= link_to recipe.title, recipe %>
+					</h4>
+				<% end %>				
+			</div>
+			<% end %>
+		</div>
+	<% end %>
 </div>
 
-<h2>My bookmarks</h2>
+
+<h2>Bookmarked Recipes</h2>
 <div>
 	<%= render @user.bookmarked_recipes %>
 </div>
+
