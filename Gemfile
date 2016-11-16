@@ -18,7 +18,8 @@ gem 'paperclip', '~> 5.1'
 gem 'disqus', '~> 1.0', '>= 1.0.4'
 gem 'cocoon', '~> 1.2', '>= 1.2.9'
 gem 'faker', '~> 1.6', '>= 1.6.6'
-gem 'ratyrate', '~> 1.2.2.alpha'	
+gem 'ratyrate', '~> 1.2.2.alpha'
+gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'	
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do

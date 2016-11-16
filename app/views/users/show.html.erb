@@ -29,3 +29,7 @@
 	<%= render @user.bookmarked_recipes %>
 </div>
 
+<div class="paginate text-center">
+	<%= will_paginate @recipes, renderer: BootstrapPagination::Rails %>
+</div>
+

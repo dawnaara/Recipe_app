@@ -2,7 +2,7 @@ class RecipesController < ApplicationController
   before_action :find_recipe, only: [:show, :edit, :update, :destroy, :modify]
 
   def index
-    @recipes = Recipe.all.order("created_at DESC")
+    @recipes = Recipe.all.order("created_at DESC").paginate(page: params[:page], per_page: 6)#calling on will_paginate gem to organize recipes 6 per page
   end
 
   def show
@@ -59,10 +59,12 @@ class RecipesController < ApplicationController
   def modify
     @modified_recipe = @recipe.dup #makes a duplicate of the instance of the recipe model
     @modified_recipe.image = @recipe.image #to copy the image as well as the model
+    @modified_recipe.directions = @recipe.directions #copies directions model
+    @modified_recipe.ingredients = @recipe.ingredients #copies ingredients model
     @modified_recipe.user = current_user #to associate the modified_recipe with current_user
 
     if @modified_recipe.save
-      flash[:notice] = "Here's your new recipe!"
+      flash[:notice] = "Modify the recipe!"
     else
       flash[:notice] = "Something went wrong. Please try again."
     end
