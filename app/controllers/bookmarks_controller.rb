@@ -1,7 +1,7 @@
 class BookmarksController < ApplicationController
 
 	def index
-		@bookmarks = Bookmark.all.order('created_at DESC')
+		@bookmarked_recipes = Bookmark.all.order('created_at DESC').map(&:recipe)#.paginate(page: params[:page], per_page: 6)page)
 	end
 
 

@@ -4,7 +4,8 @@
 		<div class="col-md-6 text-left">
     		<% unless current_user.recipes.include?(@recipe) %>
       			<%= render partial: 'bookmarks/bookmark', locals: { recipe: @recipe } %>
-    		<% end %>					
+    		<% end %>
+    		<p>This recipe has been bookmarked <%= @recipe.bookmarks.count %> times. </p>					
 		</div>
 		<div class="col-md-6 text-right">
 			<div class="star-rating" data-score= <%= @avg_rating %> ></div>

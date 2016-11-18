@@ -1,4 +1,8 @@
 <div class="container">
+<%= render 'search_form' %>
+	<% if @recipes.blank? %>
+	  <h4>There are no recipes containing the term <%= params[:search] %>.</h4>
+	<% end %>
 	<h2 class="text-center">Explore Recipes</h2>
 </div>
 
@@ -7,12 +11,7 @@
 		<div class="row">
 			<% @recipes.each do |recipe| %>
 				<div class="col-md-4">
-				<%= link_to recipe do %>
-         			<%= image_tag recipe.image.url(:medium) %>
-           			<h4 class="media-heading">
-					<%= link_to recipe.title, recipe %>
-					</h4>
-					<% end %>					
+					<%= render partial: recipe %>					
 				</div>
 			<% end %>
 		</div>

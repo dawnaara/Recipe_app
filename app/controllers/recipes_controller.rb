@@ -2,7 +2,13 @@ class RecipesController < ApplicationController
   before_action :find_recipe, only: [:show, :edit, :update, :destroy, :modify]
 
   def index
-    @recipes = Recipe.all.order("created_at DESC").paginate(page: params[:page], per_page: 6)#calling on will_paginate gem to organize recipes 6 per page
+    #@recipes = Recipe.all.order("created_at DESC").paginate(page: params[:page], per_page: 6)#calling on will_paginate gem to organize recipes 6 per page
+  
+    if params[:search]
+      @recipes = Recipe.search(params[:search]).order("created_at DESC").paginate(page: params[:page], per_page: 6)
+    else
+      @recipes = Recipe.all.order("created_at DESC").paginate(page: params[:page], per_page: 6)#calling on will_paginate gem to organize recipes 6 per page
+    end
   end
 
   def show
@@ -71,6 +77,14 @@ class RecipesController < ApplicationController
     redirect_to(edit_recipe_path(@modified_recipe))
 
     # redirect to current_user's receipe edit page for that new recipe
+  end
+
+  def search
+    if params[:search]
+      @recipes = Recipe.search(params[:search]).order("created_at DESC")
+    else
+      @recipes = Recipe.all.order('created_at DESC')
+    end
   end
 
   private
