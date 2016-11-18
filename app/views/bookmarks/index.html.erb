@@ -2,6 +2,14 @@
 	<h2 class="text-center">My Bookmarked Recipes</h2>
 </div>
 
-<div>
-	<%= render @bookmarked_recipes %>
+<div class="container">
+	<% current_user.bookmarked_recipes.each_slice(3) do |row| %>
+		<div class="row">
+			<% row.each do |recipe| %>
+			<div class="col-md-4">
+				<%= render partial: recipe %>					
+			</div>
+			<% end %>
+		</div>
+	<% end %>
 </div>
