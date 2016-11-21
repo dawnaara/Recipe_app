@@ -13,3 +13,7 @@
 		</div>
 	<% end %>
 </div>
+
+<div class="paginate text-center">
+	<%= will_paginate @bookmarked_recipes, renderer: BootstrapPagination::Rails %>
+</div>

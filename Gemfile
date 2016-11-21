@@ -21,6 +21,7 @@ gem 'faker', '~> 1.6', '>= 1.6.6'
 gem 'ratyrate', '~> 1.2.2.alpha'
 gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'	
 
+
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do

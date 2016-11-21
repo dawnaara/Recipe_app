@@ -1,18 +1,24 @@
 <div class="div"> 
-<div class="container">
-	<div class="row">
-		<div class="col-md-6 text-left">
-    		<% unless current_user.recipes.include?(@recipe) %>
-      			<%= render partial: 'bookmarks/bookmark', locals: { recipe: @recipe } %>
-    		<% end %>
-    		<p>This recipe has been bookmarked <%= @recipe.bookmarks.count %> times. </p>					
-		</div>
-		<div class="col-md-6 text-right">
-			<div class="star-rating" data-score= <%= @avg_rating %> ></div>
-				<em><%= "#{@ratings.length} ratings" %></em>	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 text-left">
+	    		<% unless current_user.recipes.include?(@recipe) %>
+	    		<%= link_to "Save & Modify", modify_recipe_path, class: 'btn btn-primary' %>
+	      			<%= render partial: 'bookmarks/bookmark', locals: { recipe: @recipe } %>
+	    		<% end %>
+	    		<p>This recipe has been bookmarked <%= @recipe.bookmarks.count %> times. </p>
+			</div>
+
+			<div class="col-md-6 text-right">
+				<div class="star-rating" data-score= <%= @avg_rating %> ></div>
+					<em><%= "#{@ratings.length} ratings" %></em>
+
+					<% if !current_user.recipes.include?(@recipe)# || if current_user.id == @ratings.ids %>
+						<%= link_to "Rate this recipe", new_recipe_rating_path(@recipe), class: 'btn btn-primary' %>
+					<% end %>	
+			</div>
 		</div>
 	</div>
-</div>
 <br>
 	<div class="container">
 		<div class="row">
@@ -60,10 +66,7 @@
 
 		<div class="row">
 				<%= link_to "Back", recipes_path, class: 'btn btn-primary' %>
-				<% unless current_user.recipes.include?(@recipe) %>
-					<%= link_to "Save & Modify", modify_recipe_path, class: 'btn btn-primary' %>
-					<%= link_to "Rate this recipe", new_recipe_rating_path(@recipe), class: 'btn btn-primary' %>
-				<% end %>	
+
 
 				<% if current_user && current_user.recipes.include?(@recipe) %>
 					<%= link_to "Edit", edit_recipe_path, class: 'btn btn-primary' %>
