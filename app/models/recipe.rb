@@ -14,8 +14,7 @@ class Recipe < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
 	def self.search(search)
-  		where("title LIKE ?", "%#{search}%") #when deploying to heroku must use ILIKE
-  		where("description LIKE ?", "%#{search}%")
+  		where("title LIKE ? OR description LIKE ?", "%#{search}%", "%#{search}%")
 	end
 
 end

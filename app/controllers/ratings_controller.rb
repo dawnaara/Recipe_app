@@ -25,8 +25,13 @@ class RatingsController < ApplicationController
   # POST 
   # POST 
   def create
-    @rating = current_user.ratings.build(rating_params)
-    @rating.recipe_id = @recipe.id 
+    @rating = current_user.ratings.find_by(recipe_id: params[:recipe_id])
+    unless @rating
+      @rating = current_user.ratings.build(rating_params)
+      @rating.recipe_id = @recipe.id 
+    else
+      @rating.update_attribute(:stars, params[:rating][:stars])
+    end
 
     respond_to do |format|
       if @rating.save
