@@ -203,7 +203,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aws-sdk (~> 2.6, >= 2.6.27)
+  aws-sdk (~> 2)
   bootstrap-sass (~> 3.3, >= 3.3.7)
   byebug
   cocoon (~> 1.2, >= 1.2.9)
