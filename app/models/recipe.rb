@@ -14,7 +14,7 @@ class Recipe < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
 	def self.search(search)
-  		where("title LIKE ? OR description LIKE ?", "%#{search}%", "%#{search}%")
+  		where("title ILIKE ? OR description ILIKE ?", "%#{search}%", "%#{search}%")
 	end
 
 end
