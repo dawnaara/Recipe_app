@@ -65,19 +65,22 @@ class RecipesController < ApplicationController
 
   def modify
     @modified_recipe = @recipe.dup #makes a duplicate of the instance of the recipe model
-    @modified_recipe.image = @recipe.image #to copy the image as well as the model
+    begin
+      @modified_recipe.image.create(attachment: @recipe.attachment)
+    rescue
+      Rails.logger.info ">>> could not duplicate image: #{@recipe.image.inspect}"
+    end
     @modified_recipe.directions = @recipe.directions #copies directions model
     @modified_recipe.ingredients = @recipe.ingredients #copies ingredients model
     @modified_recipe.user = current_user #to associate the modified_recipe with current_user
 
     if @modified_recipe.save
       flash[:notice] = "Modify the recipe!"
+      redirect_to(edit_recipe_path(@modified_recipe))
     else
       flash[:notice] = "Something went wrong. Please try again."
+      redirect_to @recipe
     end
-    redirect_to(edit_recipe_path(@modified_recipe))
-
-    # redirect to current_user's receipe edit page for that new recipe
   end
 
   def search
