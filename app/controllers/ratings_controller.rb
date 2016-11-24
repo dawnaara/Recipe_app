@@ -30,7 +30,8 @@ class RatingsController < ApplicationController
       @rating = current_user.ratings.build(rating_params)
       @rating.recipe_id = @recipe.id 
     else
-      @rating.update_attribute(:stars, params[:rating][:stars])
+      stars = params[:rating][:stars] || 0
+      @rating.update_attribute(:stars, stars)
     end
 
     respond_to do |format|
