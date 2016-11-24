@@ -20,11 +20,11 @@ class RecipesController < ApplicationController
     @tags = @recipe.tags
     @tag = Tag.new 
 
-    @ratings = Rating.where(recipe_id: @recipe.id).order('created_at DESC')#ratings where the recipe id is the recipe id. ratings is in the show page loop so we must have ratings defined here.
-    if @ratings.blank?
-      @avg_rating = 0
+    @ratings =  @recipe.ratings.order("created_at DESC")
+    unless @ratings.present?
+     @avg_rating = 0
     else
-      @avg_rating = @ratings.average(:stars).round(2)
+     @avg_rating = @ratings.average(:stars).present? ? @ratings.average(:stars).round(2) : 0
     end
   end
 
