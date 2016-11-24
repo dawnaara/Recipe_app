@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+  require 'will_paginate/array'#must include this line since we are calling will_paginate on an array
   before_action :find_recipe, only: [:show, :edit, :update, :destroy, :modify]
 
   def index
@@ -9,7 +10,7 @@ class RecipesController < ApplicationController
       direction_recipes = Direction.search(params[:search]).map(&:recipe)
       ingredient_recipes = Ingredient.search(params[:search]).map(&:recipe)
 
-      @recipes = (general_recipes + direction_recipes + ingredient_recipes).uniq.sort {|a,b| b[:created_at] <=> a[:created_at] }#.paginate(page: params[:page], per_page: 6)
+      @recipes = (general_recipes + direction_recipes + ingredient_recipes).uniq.sort {|a,b| b[:created_at] <=> a[:created_at] }.paginate(page: params[:page], per_page: 6)
     else
       @recipes = Recipe.all.order("created_at DESC").paginate(page: params[:page], per_page: 6)#calling on will_paginate gem to organize recipes 6 per page
     end
