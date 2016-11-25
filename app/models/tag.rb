@@ -8,5 +8,9 @@ class Tag < ActiveRecord::Base
 			Tag.find_or_create_by(name: tag.strip)
 		end
 	end
+	
+	def self.search(search)
+  		where("name ILIKE ?", "%#{search}%")
+	end
 
 end
