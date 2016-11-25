@@ -1,8 +1,9 @@
 <%= simple_form_for @recipe do |f| %>
+  <%= f.error_notification %>
 
 	<%= f.input :title, required: true, input_html: { class: 'form-control' } %>
 	<%= f.input :description, required: true, input_html: { class: 'form-control' } %>
-  <%= f.file_field :image, input_html: { class: 'form-control' } %>	
+  <%= f.input :image, as: :file, input_html: { class: 'form-control' } %>	
 
   <div class="div">
     <h2>Ingredients</h2>

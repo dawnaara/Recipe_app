@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  require 'will_paginate/array'#must include this line since we are calling will_paginate on an array
+  require 'will_paginate/array'#must include this line since we are calling will_paginate on an array in the index on line 13.
   before_action :find_recipe, only: [:show, :edit, :update, :destroy, :modify]
 
   def index
@@ -24,7 +24,7 @@ class RecipesController < ApplicationController
     unless @ratings.present?
      @avg_rating = 0
     else
-     @avg_rating = @ratings.average(:stars).present? ? @ratings.average(:stars).round(2) : 0
+     @avg_rating = @ratings.average(:stars).present? ? @ratings.average(:stars).round(2) : 0#ternary condition when first statement is true then its run immediate statement after ? and if condition false its run statement after ':'
     end
   end
 

@@ -13,7 +13,7 @@ gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'simple_form', '~> 3.3', '>= 3.3.1'
 gem 'paperclip', '~> 5.1'
-gem 'aws-sdk', '~> 2'#for paperclip and amazon s3
+gem 'aws-sdk', '~> 2.6', '>= 2.6.28'#for paperclip and amazon s3
 gem 'disqus', '~> 1.0', '>= 1.0.4'
 gem 'cocoon', '~> 1.2', '>= 1.2.9'
 gem 'faker', '~> 1.6', '>= 1.6.6'
