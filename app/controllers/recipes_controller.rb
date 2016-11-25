@@ -9,7 +9,7 @@ class RecipesController < ApplicationController
       general_recipes = Recipe.search(params[:search])
       direction_recipes = Direction.search(params[:search]).map(&:recipe)
       ingredient_recipes = Ingredient.search(params[:search]).map(&:recipe)
-      tag_recipes = Tag.search(params[:search]).map(&:recipe)
+      tag_recipes = Tag.search(params[:search])
 
       @recipes = (general_recipes + direction_recipes + ingredient_recipes + tag_recipes).uniq.sort {|a,b| b[:created_at] <=> a[:created_at] }.paginate(page: params[:page], per_page: 6)
     else
