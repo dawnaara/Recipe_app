@@ -26,6 +26,8 @@ class RecipesController < ApplicationController
     else
      @avg_rating = @ratings.average(:stars).present? ? @ratings.average(:stars).round(2) : 0#ternary condition when first statement is true then its run immediate statement after ? and if condition false its run statement after ':'
     end
+
+    @modified_recipes = @recipe.modified_recipes
   end
 
   def new
