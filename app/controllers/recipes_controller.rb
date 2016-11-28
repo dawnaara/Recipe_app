@@ -24,10 +24,10 @@ class RecipesController < ApplicationController
     unless @ratings.present?
      @avg_rating = 0
     else
-     @avg_rating = @ratings.average(:stars).present? ? @ratings.average(:stars).round(2) : 0#ternary condition when first statement is true then its run immediate statement after ? and if condition false its run statement after ':'
+     @avg_rating = @ratings.average(:stars).present? ? @ratings.average(:stars).round(2) : 0 #ternary condition when first statement is true then its run immediate statement after ? and if condition false its run statement after ':'
     end
 
-    @modified_recipes = @recipe.modified_recipes
+    #@modified_recipes = @recipe.modified_recipes - need to fix this code.
   end
 
   def new
