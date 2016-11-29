@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161109183731) do
+ActiveRecord::Schema.define(version: 20161128183332) do
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
@@ -98,7 +98,10 @@ ActiveRecord::Schema.define(version: 20161109183731) do
     t.datetime "image_updated_at"
     t.integer  "rating"
     t.text     "video_embeded_url"
+    t.integer  "modified_from_id"
   end
+
+  add_index "recipes", ["modified_from_id"], name: "index_recipes_on_modified_from_id"
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"

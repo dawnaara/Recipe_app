@@ -6,7 +6,7 @@
 	    		<%= link_to "Save & Modify", modify_recipe_path, class: 'btn btn-primary' %>
 	      			<%= render partial: 'bookmarks/bookmark', locals: { recipe: @recipe } %>
 	    		<% end %>
-	    		<p>This recipe has been bookmarked <%= @recipe.bookmarks.count %> times. </p>
+	    		<p>This recipe has been bookmarked <%= @recipe.bookmarks.count %> times and modified <%= @modified_recipes.count %> times.</p>
 			</div>
 
 			<div class="col-md-6 text-right">
@@ -63,6 +63,24 @@
 		</div>
 		<br>
 		<br>
+		<div class="row">
+			<% if @recipe.modified_recipe %>
+			<div class="col-md-12">
+				<p>Modified from: <%= link_to @recipe.modified_recipe.title, @recipe.modified_recipe %></p>				
+			</div>
+			<% end %>
+			
+			<% if @recipe.modified_recipes.any? %>
+			<div class="col-md-12">
+				<h3>Modifications</h3>
+				<ul>
+					<% @recipe.modified_recipes.each do |recipe| %>
+						<li><%= link_to recipe.title, recipe %></li>
+					<% end %>
+				</ul>			
+			</div>
+			<% end %>
+		</div>
 
 		<div class="row">
 				<%= link_to "Back", recipes_path, class: 'btn btn-primary' %>

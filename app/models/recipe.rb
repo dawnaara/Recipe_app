@@ -6,6 +6,10 @@ class Recipe < ActiveRecord::Base
 	has_many :bookmarks, dependent: :destroy
 	has_many :taggings
 	has_many :tags, through: :taggings
+	has_many :modified_recipes, class_name: "Recipe", foreign_key: :modified_from_id 
+	#modified_recipes doesn't have it's own model so we create an association and foreign key.
+	belongs_to :modified_recipe, class_name: "Recipe", foreign_key: :modified_from_id 
+	#has_many and belongs_to recipe both go on this model.
 
   accepts_nested_attributes_for :ingredients, reject_if: :all_blank, allow_destroy: true	
   accepts_nested_attributes_for :directions, reject_if: :all_blank, allow_destroy: true	

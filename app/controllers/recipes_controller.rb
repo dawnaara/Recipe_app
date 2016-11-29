@@ -10,9 +10,9 @@ class RecipesController < ApplicationController
       direction_recipes = Direction.search(params[:search]).map(&:recipe)
       ingredient_recipes = Ingredient.search(params[:search]).map(&:recipe)
 
-      @recipes = (general_recipes + direction_recipes + ingredient_recipes).uniq.sort {|a,b| b[:created_at] <=> a[:created_at] }.paginate(page: params[:page], per_page: 6)
+      @recipes = (general_recipes + direction_recipes + ingredient_recipes).uniq.sort {|a,b| b[:created_at] <=> a[:created_at] }.paginate(page: params[:page], per_page: 9)
     else
-      @recipes = Recipe.all.order("created_at DESC").paginate(page: params[:page], per_page: 6)#calling on will_paginate gem to organize recipes 6 per page
+      @recipes = Recipe.all.order("created_at DESC").paginate(page: params[:page], per_page: 9)
     end
   end
 
@@ -27,7 +27,7 @@ class RecipesController < ApplicationController
      @avg_rating = @ratings.average(:stars).present? ? @ratings.average(:stars).round(2) : 0 #ternary condition when first statement is true then its run immediate statement after ? and if condition false its run statement after ':'
     end
 
-    #@modified_recipes = @recipe.modified_recipes - need to fix this code.
+    @modified_recipes = @recipe.modified_recipes 
   end
 
   def new
@@ -72,11 +72,13 @@ class RecipesController < ApplicationController
 
   def modify
     @modified_recipe = @recipe.dup #makes a duplicate of the instance of the recipe model
-    begin
-      @modified_recipe.image.create(attachment: @recipe.attachment)
-    rescue
-      Rails.logger.info ">>> could not duplicate image: #{@recipe.image.inspect}"
-    end
+    @modified_recipe.video_embeded_url = nil #tells rails not to copy video
+    @modified_recipe.image = nil #tells rails not to copy image
+    # begin
+    #   @modified_recipe.image.create(attachment: @recipe.attachment)
+    # rescue
+    #   Rails.logger.info ">>> could not duplicate image: #{@recipe.image.inspect}"
+    # end
     @modified_recipe.directions = @recipe.directions #copies directions model
     @modified_recipe.ingredients = @recipe.ingredients #copies ingredients model
     @modified_recipe.user = current_user #to associate the modified_recipe with current_user
