@@ -21,7 +21,7 @@ class Recipe < ActiveRecord::Base
                         size: { in: 0..5.megabytes }
 
 	def self.search(search)
-  		where("title ILIKE ? OR description ILIKE ?", "%#{search}%", "%#{search}%")
+  		where("title LIKE ? OR description LIKE ?", "%#{search}%", "%#{search}%")
 	end
 
 end

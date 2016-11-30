@@ -7,7 +7,7 @@
 </div>
 
 <div class="container">
-	<% @user.recipes.each_slice(3) do |row| %>
+	<% @recipes.each_slice(3) do |row| %>
 		<div class="row">
 			<% row.each do |recipe| %>
 			<div class="col-md-4">
@@ -19,6 +19,6 @@
 </div>
 
 <div class="paginate text-center">
-	<%= will_paginate @user_recipes, renderer: BootstrapPagination::Rails %>
+	<%= will_paginate @recipes, renderer: BootstrapPagination::Rails %>
 </div>
 

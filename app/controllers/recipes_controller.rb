@@ -6,11 +6,16 @@ class RecipesController < ApplicationController
     #@recipes = Recipe.all.order("created_at DESC").paginate(page: params[:page], per_page: 6)#calling on will_paginate gem to organize recipes 6 per page
   
     if params[:search]
-      general_recipes = Recipe.search(params[:search])
-      direction_recipes = Direction.search(params[:search]).map(&:recipe)
-      ingredient_recipes = Ingredient.search(params[:search]).map(&:recipe)
+      search_text = params[:search].strip
+      general_recipes = Recipe.search(search_text)
+      direction_recipes = Direction.search(search_text).map(&:recipe)
+      ingredient_recipes = Ingredient.search(search_text).map(&:recipe)
+      tags_recipes = Tag.search(search_text)
+      if tags_recipes.any?
+        tags_recipes = tags_recipes.map(&:recipes)
+      end
 
-      @recipes = (general_recipes + direction_recipes + ingredient_recipes).uniq.sort {|a,b| b[:created_at] <=> a[:created_at] }.paginate(page: params[:page], per_page: 9)
+      @recipes = (general_recipes + direction_recipes + ingredient_recipes + tags_recipes).flatten.uniq.sort {|a,b| b.created_at <=> a.created_at }.paginate(page: params[:page], per_page: 9)
     else
       @recipes = Recipe.all.order("created_at DESC").paginate(page: params[:page], per_page: 9)
     end
@@ -27,7 +32,8 @@ class RecipesController < ApplicationController
      @avg_rating = @ratings.average(:stars).present? ? @ratings.average(:stars).round(2) : 0 #ternary condition when first statement is true then its run immediate statement after ? and if condition false its run statement after ':'
     end
 
-    @modified_recipes = @recipe.modified_recipes 
+    @modified_recipes = @recipe.modified_recipes
+    #@modified_recipe = @recipe.modified_recipe  
   end
 
   def new
@@ -82,6 +88,7 @@ class RecipesController < ApplicationController
     @modified_recipe.directions = @recipe.directions #copies directions model
     @modified_recipe.ingredients = @recipe.ingredients #copies ingredients model
     @modified_recipe.user = current_user #to associate the modified_recipe with current_user
+    @modified_recipe.modified_from_id = @recipe.id
 
     if @modified_recipe.save
       flash[:notice] = "Modify the recipe!"

@@ -1,2 +1,6 @@
-<%= image_tag recipe.image.url(:medium), class: "recipe_image" %>
+<% unless recipe.image.url == "/images/original/missing.png" %>
+	<%= image_tag recipe.image.url(:medium), class: "recipe_image" %>
+<% else %>
+	<div class="recipe_image">Image not available</div>
+<% end %>
 <h3><%= link_to recipe.title, recipe %></h3> 
