@@ -21,3 +21,6 @@
 
 .DS_Store
 /public/system/*
+
+# Ignore secrets.yml
+/config/secrets.yml
